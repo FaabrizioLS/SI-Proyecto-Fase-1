@@ -45,348 +45,232 @@
    (sensibilidad_precio si)
    (interes_financiamiento si)
 )
-(deffacts hechos-del-usuario 
-   ; Definir hechos de entrada según el contexto
-)
 
-;; Reglas con nombres y vehículos sugeridos
-
-(defrule presupuesto-bajo-economia-combustible
+(defrule regla1
   (presupuesto_bajo ?p)
   (necesita_economia_combustible si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido hyundai))
-  (assert (sugerido kia))
-)
+  (printout t "Sugerencia: Auto compacto económico. Considera marcas como Toyota, Hyundai, o Kia." crlf))
 
-(defrule presupuesto-alto-preferencia-suv
+(defrule regla2
   (presupuesto_alto ?p)
   (preferencia_suv si)
   =>
-  (assert (sugerido nissan))
-  (assert (sugerido honda))
-  (assert (sugerido mitsubishi))
-)
+  (printout t "Sugerencia: SUV premium disponible. Marcas recomendadas: Nissan, Honda, Mitsubishi." crlf))
 
-(defrule valora-seguridad-reputacion-seguridad
+(defrule regla3
   (valora_seguridad si)
   (reputacion_seguridad_importante si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido honda))
-  (assert (sugerido volkswagen))
-)
+  (printout t "Recomendado: Modelos con 5 estrellas en seguridad. Marcas: Toyota, Honda, Volkswagen." crlf))
 
-(defrule clima-lluvioso-ruta-montañosa
+(defrule regla4
   (clima_lluvioso si)
   (ruta_montañosa si)
   =>
-  (assert (sugerido mitsubishi))
-  (assert (sugerido subaru))
-)
+  (printout t "Sugerencia: Vehículo con tracción AWD. Marcas: Mitsubishi, Subaru." crlf))
 
-(defrule uso-trabajo-viajes-largos
+(defrule regla5
   (uso_trabajo si)
   (uso_viajes_largos si)
   =>
-  (assert (sugerido ford))
-  (assert (sugerido nissan))
-  (assert (sugerido hyundai))
-)
+  (printout t "Recomendado: Motor diésel o híbrido. Marcas recomendadas: Ford, Nissan, Hyundai." crlf))
 
-(defrule valor-reventa-marca-preferida-toyota
+(defrule regla6
   (prioriza_valor_reventa si)
   (marca_preferida toyota)
   =>
-  (assert (sugerido toyota))
-)
+  (printout t "Sugerido: Toyota de alta demanda. Muy buena opción para valor de reventa." crlf))
 
-(defrule kilometraje-alto-precio-combustible-alto
+(defrule regla7
   (kilometraje_anual_alto si)
   (precio_combustible_alto si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido chevrolet))
-  (assert (sugerido renault))
-)
+  (printout t "Recomendado: Híbrido o eléctrico. Marcas recomendadas: Toyota, Chevrolet, Renault." crlf))
 
-(defrule sin-servicio-tecnico-disponible
+(defrule regla8
   (disponibilidad_servicio_tecnico no)
   =>
-  (assert (sugerido ford))
-  (assert (sugerido honda))
-)
+  (printout t "Evitar marcas sin soporte local. Evitar marcas que no tengan presencia en Perú." crlf))
 
-(defrule tipo-estacionamiento-reducido-preferencia-suv
+(defrule regla9
   (tipo_estacionamiento_reducido)
   (preferencia_suv si)
   =>
-  (assert (sugerido kia))
-  (assert (sugerido honda))
-  (assert (sugerido volkswagen))
-)
+  (printout t "Sugerencia: SUV compacto urbano. Marcas: Kia, Honda, Volkswagen." crlf))
 
-(defrule preferencia-transmision-automatica-viajes-largos
+(defrule regla10
   (preferencia_transmision_automatica)
   (uso_viajes_largos si)
   =>
-  (assert (sugerido nissan))
-  (assert (sugerido honda))
-  (assert (sugerido subaru))
-)
+  (printout t "Recomendado: Transmisión CVT. Marcas recomendadas: Nissan, Honda, Subaru." crlf))
 
-(defrule edad-comprador-preferencia-estetica
+(defrule regla11
   (edad_comprador ?e&:(< ?e 35))
   (preferencia_estetica si)
   =>
-  (assert (sugerido ford))
-  (assert (sugerido hyundai))
-  (assert (sugerido peugeot))
-)
+  (printout t "Recomendado: Deportivo compacto. Marcas recomendadas: Ford, Hyundai, Peugeot." crlf))
 
-(defrule baul-grande-uso-familiar
+(defrule regla12
   (necesita_baul_grande si)
   (uso_familiar si)
   =>
-  (assert (sugerido chevrolet))
-  (assert (sugerido toyota))
-  (assert (sugerido hyundai))
-)
+  (printout t "Sugerido: Sedán grande o SUV. Marcas recomendadas: Chevrolet, Toyota, Hyundai." crlf))
 
-(defrule vehiculo-antiguo-recambio
+(defrule regla13
   (vehiculo_actual_antiguo si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido ford))
-)
+  (printout t "Ofrecemos bono de recambio. Considera marcas como Toyota o Ford." crlf))
 
-(defrule acceso-credito-presupuesto-medio
+(defrule regla14
   (acceso_credito si)
   (presupuesto_medio ?p)
   =>
-  (assert (sugerido nissan))
-  (assert (sugerido mitsubishi))
-  (assert (sugerido kia))
-)
+  (printout t "Disponible: Ofertas de financiamiento. Marcas como Nissan, Mitsubishi y Kia ofrecen opciones." crlf))
 
-(defrule sistema-infoentretenimiento-importante
+(defrule regla15
   (importancia_sistema_infoentretenimiento si)
   =>
-  (assert (sugerido chevrolet))
-  (assert (sugerido volkswagen))
-  (assert (sugerido renault))
-)
+  (printout t "Sugerido: Modelos con pantalla táctil y conectividad. Marcas recomendadas: Chevrolet, Volkswagen, Renault." crlf))
 
-(defrule uso-offroad-no-ruta-montañosa
+(defrule regla16
   (uso_offroad no)
   (ruta_montañosa si)
   =>
-  (assert (sugerido subaru))
-  (assert (sugerido mitsubishi))
-)
+  (printout t "Recomendado: SUV urbano AWD. Marcas: Subaru, Mitsubishi." crlf))
 
-(defrule frecuencia-viajes-alta-mantenimiento-bajo
+(defrule regla17
   (frecuencia_viajes alta)
   (valora_mantenimiento_bajo si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido honda))
-  (assert (sugerido suzuki))
-)
+  (printout t "Sugerido: Marca confiable y económica. Marcas: Toyota, Honda, Suzuki." crlf))
 
-(defrule conocimiento-mecanico-bajo
+(defrule regla18
   (conocimiento_mecanico bajo)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido hyundai))
-  (assert (sugerido kia))
-)
+  (printout t "Sugerido: Modelos de bajo mantenimiento. Marcas: Toyota, Hyundai, Kia." crlf))
 
-(defrule autos-nuevos-presupuesto-bajo
+(defrule regla19
   (preferencia_autos_nuevos si)
   (presupuesto_bajo ?p)
   =>
-  (assert (sugerido kia))
-  (assert (sugerido suzuki))
-  (assert (sugerido hyundai))
-)
+  (printout t "Mostrar opciones nuevas en stock económico. Marcas: Kia, Suzuki, Hyundai." crlf))
 
-(defrule preferencia-color-negro
+(defrule regla20
   (preferencia_color negro)
   =>
-  (assert (sugerido ford))
-  (assert (sugerido chevrolet))
-  (assert (sugerido honda))
-)
+  (printout t "Sugerir modelos disponibles en color negro. Marcas: Ford, Chevrolet, Honda." crlf))
 
-(defrule uso-familiar-preferencia-suv-tecnologia
+(defrule regla21
   (uso_familiar si)
   (preferencia_suv si)
   (preferencia_tecnologia si)
   =>
-  (assert (sugerido nissan))
-  (assert (sugerido toyota))
-  (assert (sugerido kia))
-)
+  (printout t "Sugerencia: SUV familiar con tecnología avanzada. Marcas: Nissan, Toyota, Kia." crlf))
 
-(defrule tipo-estacionamiento-reducido
+(defrule regla22
   (tipo_estacionamiento_reducido)
   =>
-  (assert (sugerido honda))
-  (assert (sugerido suzuki))
-  (assert (sugerido renault))
-)
+  (printout t "Recomendación: Vehículo compacto con buena maniobrabilidad. Marcas: Honda, Suzuki, Renault." crlf))
 
-(defrule preferencia-diseño-moderno
+(defrule regla23
   (preferencia_diseño_moderno si)
   =>
-  (assert (sugerido peugeot))
-  (assert (sugerido volkswagen))
-  (assert (sugerido ford))
-)
+  (printout t "Sugerencia: Modelos con diseño actual y estético. Marcas: Peugeot, Volkswagen, Ford." crlf))
 
-(defrule presupuesto-bajo-preferencia-suv
+(defrule regla24
   (presupuesto_bajo ?p)
   (preferencia_suv si)
   =>
-  (assert (sugerido hyundai))
-  (assert (sugerido suzuki))
-  (assert (sugerido renault))
-)
+  (printout t "Sugerencia: SUV económica. Marcas: Hyundai, Suzuki, Renault." crlf))
 
-(defrule preferencia-electrico
+(defrule regla25
   (preferencia_electrico si)
   =>
-  (assert (sugerido renault))
-  (assert (sugerido hyundai))
-  (assert (sugerido nissan))
-)
+  (printout t "Sugerido: Vehículos eléctricos disponibles. Marcas: Renault, Hyundai, Nissan." crlf))
 
-(defrule presupuesto-medio-preferencia-suv
+(defrule regla26
   (presupuesto_medio ?p)
   (preferencia_suv si)
   =>
-  (assert (sugerido mitsubishi))
-  (assert (sugerido chevrolet))
-  (assert (sugerido kia))
-)
+  (printout t "Sugerencia: SUV de gama media. Marcas: Mitsubishi, Chevrolet, Kia." crlf))
 
-(defrule preferencia-familiar-marca-preferida-toyota
+(defrule regla27
   (preferencia_familiar si)
   (marca_preferida toyota)
   =>
-  (assert (sugerido toyota))
-)
+  (printout t "Sugerido: Toyota para uso familiar. Marcas recomendadas: Toyota, Honda." crlf))
 
-(defrule baul-grande-preferencia-suv
+(defrule regla28
   (necesita_baul_grande si)
   (preferencia_suv si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido chevrolet))
-  (assert (sugerido hyundai))
-)
+  (printout t "Recomendado: SUV con gran capacidad de maletero. Marcas: Toyota, Chevrolet, Hyundai." crlf))
 
-(defrule clima-frio
+(defrule regla29
   (clima_frio si)
   =>
-  (assert (sugerido subaru))
-  (assert (sugerido mitsubishi))
-  (assert (sugerido honda))
-)
+  (printout t "Sugerencia: Vehículo con calefacción. Marcas: Subaru, Mitsubishi, Honda." crlf))
 
-(defrule presupuesto-alto-preferencia-automatica
+(defrule regla30
   (presupuesto_alto ?p)
   (preferencia_automatica si)
   =>
-  (assert (sugerido bmw))
-  (assert (sugerido mercedes-benz))
-  (assert (sugerido audi))
-)
+  (printout t "Sugerencia: Auto de lujo con transmisión automática. Marcas: BMW, Mercedes-Benz, Audi." crlf))
 
-(defrule uso-diario-preferencia-economico
+(defrule regla31
   (uso_diario si)
   (preferencia_economico si)
   =>
-  (assert (sugerido suzuki))
-  (assert (sugerido kia))
-  (assert (sugerido honda))
-)
+  (printout t "Sugerido: Auto económico y confiable. Marcas: Suzuki, Kia, Honda." crlf))
 
-(defrule preferencia-sedan-presupuesto-medio
+(defrule regla32
   (preferencia_sedan si)
   (presupuesto_medio ?p)
   =>
-  (assert (sugerido hyundai))
-  (assert (sugerido nissan))
-  (assert (sugerido ford))
-)
+  (printout t "Sugerencia: Sedan de gama media. Marcas: Hyundai, Nissan, Ford." crlf))
 
-(defrule preferencia-color-blanco
+(defrule regla33
   (preferencia_color blanco)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido chevrolet))
-  (assert (sugerido ford))
-)
+  (printout t "Sugerencia: Modelos disponibles en color blanco. Marcas: Toyota, Chevrolet, Ford." crlf))
 
-(defrule edad-comprador-mayor-40
+(defrule regla34
   (edad_comprador ?e&:(>= ?e 40))
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido honda))
-  (assert (sugerido chevrolet))
-)
+  (printout t "Sugerido: Autos cómodos y de fácil acceso. Marcas: Toyota, Honda, Chevrolet." crlf))
 
-(defrule preferencia-hibrido
+(defrule regla35
   (preferencia_hibrido si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido honda))
-  (assert (sugerido nissan))
-)
+  (printout t "Sugerido: Vehículo híbrido. Marcas: Toyota, Honda, Nissan." crlf))
 
-(defrule preferencia-economico-uso-diario
+(defrule regla36
   (preferencia_economico si)
   (uso_diario si)
   =>
-  (assert (sugerido hyundai))
-  (assert (sugerido suzuki))
-)
+  (printout t "Sugerido: Auto económico para el día a día. Marcas: Hyundai, Suzuki." crlf))
 
-(defrule presupuesto-alto-preferencia-4x4
+(defrule regla37
   (presupuesto_alto ?p)
   (preferencia_4x4 si)
   =>
-  (assert (sugerido toyota))
-  (assert (sugerido land-rover))
-  (assert (sugerido mitsubishi))
-)
+  (printout t "Sugerido: SUV 4x4 para aventuras. Marcas: Toyota, Land Rover, Mitsubishi." crlf))
 
-(defrule presupuesto-bajo-preferencia-deportivo
+(defrule regla38
   (presupuesto_bajo ?p)
   (preferencia_deportivo si)
   =>
-  (assert (sugerido hyundai))
-  (assert (sugerido ford))
-  (assert (sugerido peugeot))
-)
+  (printout t "Sugerido: Vehículo deportivo económico. Marcas: Hyundai, Ford, Peugeot." crlf))
 
-(defrule frecuencia-viajes-baja-preferencia-auto-sedan
+(defrule regla39
   (frecuencia_viajes baja)
   (preferencia_auto_sedan si)
   =>
-  (assert (sugerido suzuki))
-  (assert (sugerido kia))
-  (assert (sugerido honda))
-)
+  (printout t "Sugerido: Auto sedan de bajo mantenimiento. Marcas: Suzuki, Kia, Honda." crlf))
 
-(defrule necesita-sistema-navegacion-presupuesto-medio
+(defrule regla40
   (necesita_sistema_navegacion si)
   (presupuesto_medio ?p)
   =>
-  (assert (sugerido nissan))
-  (assert (sugerido mazda))
-  (assert (sugerido chevrolet))
-)
+  (printout t "Sugerido: Auto con sistema de navegación y características de gama media. Marcas: Nissan, Mazda, Chevrolet." crlf))
